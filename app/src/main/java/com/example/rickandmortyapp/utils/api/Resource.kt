@@ -1,5 +1,4 @@
-package com.example.pokemonapp.utils.api
-
+package com.example.rickandmortyapp.utils.api
 
 data class Resource<out T>(val status: Status, val data: T?, val error: ErrorModel?) {
     companion object {

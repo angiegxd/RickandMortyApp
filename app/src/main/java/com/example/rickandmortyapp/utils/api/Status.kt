@@ -1,4 +1,4 @@
-package com.example.pokemonapp.utils.api
+package com.example.rickandmortyapp.utils.api
 
 enum class Status {
     SUCCESS,

@@ -1,6 +1,5 @@
-package com.example.pokemonapp.utils.api
+package com.example.rickandmortyapp.utils.api
 
-import com.example.pokemonapp.utils.dto.PokemonResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET

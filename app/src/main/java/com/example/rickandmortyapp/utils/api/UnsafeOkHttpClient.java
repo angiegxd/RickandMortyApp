@@ -1,5 +1,4 @@
-package utils.api;
-
+package com.example.rickandmortyapp.utils.api;
 
 import android.util.Log;
 

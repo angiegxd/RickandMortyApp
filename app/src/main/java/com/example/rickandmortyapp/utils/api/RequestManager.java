@@ -1,5 +1,4 @@
-package utils.api;
-
+package com.example.rickandmortyapp.utils.api;
 
 import com.google.gson.Gson;
 import java.util.concurrent.TimeUnit;

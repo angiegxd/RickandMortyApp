@@ -1,4 +1,4 @@
-package com.example.pokemonapp.utils.api
+package com.example.rickandmortyapp.utils.api
 
 class ErrorModel(var type: Type, val message: String, val detailType: String? = null) {
 
