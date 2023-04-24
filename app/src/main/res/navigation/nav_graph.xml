@@ -11,12 +11,12 @@
         android:label="CharactersList"
         tools:layout="@layout/character_list">
         <action
-            android:id="@+id/action_charactersList_to_charactersDetails"
-            app:destination="@id/charactersDetails" />
+            android:id="@+id/action_charactersList_to_episodesList"
+            app:destination="@id/episodesList" />
     </fragment>
     <fragment
-        android:id="@+id/charactersDetails"
-        android:name="com.example.rickandmortyapp.views.CharactersDetails"
-        android:label="CharactersDetails"
-        tools:layout="@layout/character_details"/>
+        android:id="@+id/episodesList"
+        android:name="com.example.rickandmortyapp.views.EpisodesList"
+        android:label="EpisodesList"
+        tools:layout="@layout/episode_list"/>
 </navigation>

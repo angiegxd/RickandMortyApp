@@ -7,28 +7,30 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.utils.api.Resource
 import com.example.rickandmortyapp.utils.api.Status
 import com.example.rickandmortyapp.utils.dto.Results
+import com.example.rickandmortyapp.utils.dto.Result
 import com.example.rickandmortyapp.viewmodel.RickAndMortyViewModel
+import com.example.rickandmortyapp.views.adapter.RickAndMortyEpisodesAdapter
 import com.example.rickandmortyapp.views.adapter.RickAndMortyListAdapter
 import kotlinx.android.synthetic.main.character_list.*
+import kotlinx.android.synthetic.main.episode_list.*
 
-class CharactersList : Fragment() {
-    private val characterObserver = Observer<Resource<List<Results>>> {
-        when (it.status) {
-            Status.SUCCESS -> {
-                val adapter = RickAndMortyListAdapter(it.data!!)
-                rv_rickandmorty_list.adapter = adapter
+class EpisodesList : Fragment(){
+    private val episodeObserver= Observer<Resource<List<Result>>>{
+        when(it.status){
+            Status.SUCCESS->{
+                val adapter= RickAndMortyEpisodesAdapter(it.data!!)
+                rv_rickandmorty_episodes_list.adapter= adapter
             }
-            Status.ERROR -> {
+            Status.ERROR->{
 
             }
-            Status.LOADING -> {
+            Status.LOADING->{
 
             }
         }
@@ -36,33 +38,25 @@ class CharactersList : Fragment() {
     private lateinit var viewModel: RickAndMortyViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(RickAndMortyViewModel::class.java)
+        viewModel= ViewModelProvider(requireActivity()).get(RickAndMortyViewModel::class.java)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.character_list, container, false)
+        return inflater.inflate(R.layout.episode_list, container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         createObservers()
-        addActions()
-        viewModel.showCharacters()
-        rv_rickandmorty_list.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.showEpisodes()
+        rv_rickandmorty_episodes_list.layoutManager= LinearLayoutManager(requireContext())
     }
 
     private fun createObservers() {
-        viewModel.characters.observe(viewLifecycleOwner, characterObserver)
+        viewModel.episodes.observe(viewLifecycleOwner, episodeObserver)
     }
 
-    fun addActions() {
-        btn_fragment_rickandmorty_sig.setText("Continuar Episodes")
-        btn_fragment_rickandmorty_sig.setOnClickListener {
-            findNavController().navigate(R.id.action_charactersList_to_episodesList)
-        }
-    }
 }

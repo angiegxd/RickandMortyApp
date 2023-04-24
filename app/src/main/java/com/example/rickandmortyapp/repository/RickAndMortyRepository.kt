@@ -5,6 +5,7 @@ import com.example.rickandmortyapp.BuildConfig
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.utils.api.*
 import com.example.rickandmortyapp.utils.dto.Results
+import com.example.rickandmortyapp.utils.dto.Result
 
 class RickAndMortyRepository {
     private val service = RequestManager(BuildConfig.BASE_URL).create(ApiService::class.java)
@@ -13,6 +14,14 @@ class RickAndMortyRepository {
     suspend fun getRickAndMortyCharacters():Resource<List<Results>> {
         return try {
     val response=service.getRickandMortyList(application.getString(R.string.service_characters))
+            Resource(Status.SUCCESS, response.body()!!.results, null)
+        } catch (e: Exception) {
+    Resource(Status.ERROR,  null, ErrorModel(ErrorModel.Type.TOLERABLE, "Algo salió mal x.x"))
+        }
+    }
+    suspend fun getRickAndMortyEpisodes():Resource<List<Result>> {
+        return try {
+    val response=service.getRickandMortyEpisodesList(application.getString(R.string.service_episodes))
             Resource(Status.SUCCESS, response.body()!!.results, null)
         } catch (e: Exception) {
     Resource(Status.ERROR,  null, ErrorModel(ErrorModel.Type.TOLERABLE, "Algo salió mal x.x"))
