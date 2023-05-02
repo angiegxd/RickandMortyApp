@@ -22,7 +22,13 @@ class CharactersList : Fragment() {
     private val characterObserver = Observer<Resource<List<Results>>> {
         when (it.status) {
             Status.SUCCESS -> {
-                val adapter = RickAndMortyListAdapter(it.data!!)
+                val adapter = RickAndMortyListAdapter(it.data!!, object : RickAndMortyListAdapter.OnItemClickListener{
+                    override fun onItemClick(position: Int) {
+                        viewModel.setSelectedItemRyM(position)
+                        findNavController().navigate(R.id.action_charactersList_to_charactersDetails)
+                    }
+
+                })
                 rv_rickandmorty_list.adapter = adapter
             }
             Status.ERROR -> {
